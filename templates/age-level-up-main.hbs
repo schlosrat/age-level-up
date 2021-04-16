@@ -1,0 +1,12 @@
+<form class="form-level-up" id="level-up" autocomplete="off" onsubmit="event.preventDefault();">
+    <div class="form-group">
+        {{#if thumbnails}}
+            <div style="flex-direction: row; white-space: nowrap; width: 380px; text-align: center;">
+                <img src="{{thumbnails.image}}" style="border: none; margin: 5px; max-width: 100px"/>
+            </div>
+        {{/if}}
+        <label for="token-health-input">{{localize "LEVEL_UP.Amount"}}</label>
+        <input id="token-health-input" type="number" data-dtype="Number" name="amount" min="0" max="999"/>
+        <p><small>{{localize "LEVEL_UP.Dialog_Help"}}</small></p>
+    </div>
+</form>

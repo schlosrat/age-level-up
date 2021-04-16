@@ -1,0 +1,33 @@
+{
+  "name": "age-level-up",
+  "title": "AGE System Level Up",
+  "description": "Assist with leveling up a Player Character in an AGE System game",
+  "author": "schlosrat",
+  "version": "0.0.1",
+  "minimumCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "0.7.9",
+  "styles": ["age-level-up.css"],
+  "esmodules": ["age-level-up.js"],
+  "url": "https://github.com/schlosrat/age-level-up",
+  "manifest": "https://raw.githubusercontent.com/schlosrat/age-level-up/master/module.json",
+  "download": "https://github.com/schlosrat/age-level-up/archive/refs/tags/0.0.1.zip",
+  "changelog": "https://github.com/schlosrat/age-level-up/blob/master/CHANGELOG.md",
+  "readme": "https://github.com/schlosrat/age-level-up/blob/master/README.md",
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
+    }
+  ]
+}
