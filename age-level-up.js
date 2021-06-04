@@ -2,27 +2,27 @@
 
 import settings, {CONFIG} from './settings.js';
 import {i18n} from './ui.js';
-import getNewHP from './getNewHP.js';
+// import getNewHP from './getNewHP.js';
 
 const DELAY = 400;
 
-let tokenHealthDisplayed = false;
+let levelUpDisplayed = false;
 let dialog, timer, KeyBinding;
 
-/**
- * Extend Dialog class to force focus on the input
- */
-class TokenHealthDialog extends Dialog {
-  activateListeners(html) {
-    super.activateListeners(html);
+// /**
+//  * Extend Dialog class to force focus on the input
+//  */
+// class levelUpDialog extends Dialog {
+//   activateListeners(html) {
+//     super.activateListeners(html);
 
-    // Focus the input
-    html.find('#token-health-input').focus();
+//     // Focus the input
+//     html.find('#level-up-input').focus();
 
-    // Add a class to dialog-buttons to be able to style them without breaking other stuff :/
-    html.addClass('token-health');
-  }
-}
+//     // Add a class to dialog-buttons to be able to style them without breaking other stuff :/
+//     html.addClass('level-up');
+//   }
+// }
 
 /**
  * Apply damage, use the Actor5e formula
@@ -397,7 +397,7 @@ const ageDamageBuyoff = async(ageSystemActor, dRemaining) => {
  * @returns {Promise<void>}
  */
 const displayOverlay = async (isDamage, isTargeted = false) => {
-  tokenHealthDisplayed = true;
+  levelUpDisplayed = true;
 
   const buttons = {
     heal: {
@@ -424,19 +424,19 @@ const displayOverlay = async (isDamage, isTargeted = false) => {
   let thumbnails = tokens.slice(0, 4).map((t, idx) => ({ image: t.data.img, opacity: (1 - 0.15 * idx) }))
 
   const content = await renderTemplate(
-    `modules/token-health/templates/token-health.hbs`,
+    `modules/level-up/templates/level-up.hbs`,
     { thumbnails },
   );
 
   // Render the dialog
-  dialog = new TokenHealthDialog({
+  dialog = new levelUpDialog({
     title: i18n(dialogTitle).replace('$1', nameOfTokens),
     buttons,
     content,
     default: isDamage ? 'damage' : 'heal',
     close: () => {
       timer = setTimeout(() => {
-        tokenHealthDisplayed = false;
+        levelUpDisplayed = false;
       }, DELAY);
     },
   }).render(true);
@@ -446,7 +446,7 @@ const displayOverlay = async (isDamage, isTargeted = false) => {
  * Force closing dialog on Escape (FVTT denies that if you focus something)
  */
 const onEscape = () => {
-  if (dialog && tokenHealthDisplayed) {
+  if (dialog && levelUpDisplayed) {
     dialog.close();
   }
 };
@@ -463,14 +463,14 @@ const toggle = (event, key, isDamage = true, isTarget = false) => {
   // Don't display if no tokens are controlled. Don't display as well if we were trying
   // to apply damage to targets
   if (
-    !tokenHealthDisplayed &&
+    !levelUpDisplayed &&
     canvas.tokens.controlled.length > 0 &&
     !isTarget
   ) {
     displayOverlay(isDamage).catch(console.error);
   }
   // Don't display if no tokens are targeted and we were trying to attack selected
-  if (!tokenHealthDisplayed && game.user.targets.size > 0 && isTarget) {
+  if (!levelUpDisplayed && game.user.targets.size > 0 && isTarget) {
     displayOverlay(isDamage, isTarget).catch(console.error);
   }
 };
